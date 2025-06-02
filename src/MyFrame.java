@@ -90,8 +90,13 @@ public class MyFrame
             quantity = Integer.parseInt(mTxtNumber.getText());
             String discountSelected = mCmbDiscount.getSelectedItem().toString();
 
-            CashSuper cashSuper = CashFactory.createCashAdapter(discountSelected) ;
-            cost = cashSuper.acceptCash(price*quantity);
+            //简单工厂
+//            CashSuper cashSuper = CashFactory.createCashAdapter(discountSelected) ;
+//            cost = cashSuper.acceptCash(price*quantity);
+
+            //策略模式
+            cost = new CashContext(discountSelected).getResult(price*quantity);
+
             total += cost;
             mLstmodelDetail.addElement("售价:"+price + " 数量:" + quantity +" 折扣:"+discountSelected+" 花费:"+cost);
             mLblTotal.setText("总计:" + total);
